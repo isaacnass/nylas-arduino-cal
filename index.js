@@ -15,8 +15,10 @@ app.get('/meeting-time', async (req, res) => {
 		return res.status(401).send('Invalid credentials')
 	}
 
+	const timestamp = Math.max(Math.round(Date.now() / 1000), 1672739888)
+
 	const r = await fetch(
-		'https://api.nylas.com/events?starts_after=1672466048&expand_recurring=true&show_cancelled=false&busy=true&limit=25',
+		`https://api.nylas.com/events?starts_after=${timestamp}&expand_recurring=true&show_cancelled=false&busy=true&limit=25`,
 		{
 			headers: {
 				'Content-Type': 'application/json',
